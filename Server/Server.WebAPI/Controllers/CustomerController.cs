@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Server.Application.Features.Customers.CreateCustomer;
 using Server.Application.Features.Customers.DeleteCustomerById;
 using Server.Application.Features.Customers.GetAllCustomer;
+using Server.Application.Features.Customers.UpdateCustomer;
 using Server.WebAPI.Abstractions;
 
 namespace Server.WebAPI.Controllers
@@ -30,6 +31,13 @@ namespace Server.WebAPI.Controllers
 
         [HttpPost]
         public async Task<IActionResult> DeleteById(DeleteCustomerByIdCommand request, CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(request, cancellationToken);
+            return StatusCode(response.StatusCode, response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(UpdateCustomerCommand request, CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(request, cancellationToken);
             return StatusCode(response.StatusCode, response);

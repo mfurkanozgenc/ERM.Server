@@ -18,7 +18,7 @@ namespace Server.Application.Features.Customers.CreateCustomer
 
             if(isTaxNumberExsist)
             {
-                return Result<string>.Failure("Veri Numarası Daha Önce Kayıt Edilmiştir");
+                return Result<string>.Failure("Vergi Numarası Daha Önce Kayıt Edilmiştir");
             }
 
             var customer = mapper.Map<Customer>(request);

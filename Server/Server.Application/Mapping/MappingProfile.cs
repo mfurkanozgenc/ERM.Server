@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Server.Application.Features.Customers.CreateCustomer;
+using Server.Application.Features.Customers.UpdateCustomer;
 using Server.Domain.Entities;
 
 namespace Server.Application.Mapping
@@ -9,6 +10,7 @@ namespace Server.Application.Mapping
         public MappingProfile()
         {
             CreateMap<CreateCustomerCommand, Customer>();
+            CreateMap<UpdateCustomerCommand, Customer>();
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using Server.Infrastructure.Context;
 namespace Server.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240519173711_mig6")]
+    partial class mig6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -200,8 +203,6 @@ namespace Server.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
-
                     b.ToTable("Recipes");
                 });
 
@@ -210,6 +211,9 @@ namespace Server.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("MyProperty")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
@@ -229,17 +233,6 @@ namespace Server.Infrastructure.Migrations
                     b.ToTable("RecipeDetails");
                 });
 
-            modelBuilder.Entity("Server.Domain.Entities.Recipe", b =>
-                {
-                    b.HasOne("Server.Domain.Entities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("Server.Domain.Entities.RecipeDetail", b =>
                 {
                     b.HasOne("Server.Domain.Entities.Product", "Product")
@@ -249,7 +242,7 @@ namespace Server.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("Server.Domain.Entities.Recipe", null)
-                        .WithMany("Details")
+                        .WithMany("RecipeDetails")
                         .HasForeignKey("RecipeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -259,7 +252,7 @@ namespace Server.Infrastructure.Migrations
 
             modelBuilder.Entity("Server.Domain.Entities.Recipe", b =>
                 {
-                    b.Navigation("Details");
+                    b.Navigation("RecipeDetails");
                 });
 #pragma warning restore 612, 618
         }

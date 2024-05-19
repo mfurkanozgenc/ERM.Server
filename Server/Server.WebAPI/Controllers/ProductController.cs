@@ -37,7 +37,7 @@ namespace Server.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(DeleteProductByIdCommand request, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteById(DeleteProductByIdCommand request, CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(request, cancellationToken);
             return StatusCode(response.StatusCode, response);

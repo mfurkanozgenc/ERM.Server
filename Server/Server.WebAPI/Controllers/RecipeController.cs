@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Server.Application.Features.Recipes.CreateRecipe;
 using Server.Application.Features.Recipes.DeleteRecipeById;
 using Server.Application.Features.Recipes.GetAllRecipe;
+using Server.Application.Features.Recipes.GetByIdRecipteWithDetails;
 using Server.WebAPI.Abstractions;
 
 namespace Server.WebAPI.Controllers

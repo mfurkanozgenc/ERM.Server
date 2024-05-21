@@ -1,0 +1,28 @@
+﻿using GenericRepository;
+using MediatR;
+using Server.Domain.Entities;
+using Server.Domain.Repositories;
+using TS.Result;
+
+namespace Server.Application.Features.Orders.DeleteOrder
+{
+    public sealed class DeleteOrderByIdCommandHandler(
+        IOrderRepository orderRepository,
+        IUnitOfWork unitOfWork) : IRequestHandler<DeleteOrderByIdCommand, Result<string>>
+    {
+        public async Task<Result<string>> Handle(DeleteOrderByIdCommand request, CancellationToken cancellationToken)
+        {
+            Order? order = await orderRepository.GetByExpressionWithTrackingAsync(o => o.Id == request.OrderId,cancellationToken);
+
+            if(order is null)
+            {
+                return Result<string>.Failure("Sipariş Bulunamadı");
+            }
+
+            orderRepository.Delete(order);
+            await unitOfWork.SaveChangesAsync(cancellationToken);
+
+            return "Sipariş Silme Başarılı";
+        }
+    }
+}

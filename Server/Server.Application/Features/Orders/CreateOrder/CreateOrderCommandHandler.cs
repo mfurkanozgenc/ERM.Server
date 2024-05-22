@@ -25,7 +25,7 @@ namespace Server.Application.Features.Orders.CreateOrder
             }
 
             Order order = mapper.Map<Order>(request);
-            order.OrderNumber = lastOrderNumber ++;
+            order.OrderNumber = lastOrderNumber +1;
             order.OrderNumberYear = request.Date.Year;
  
             await orderRepository.AddAsync(order,cancellationToken);

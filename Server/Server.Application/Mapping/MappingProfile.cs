@@ -50,14 +50,10 @@ namespace Server.Application.Mapping
 
 
             CreateMap<UpdateOrderCommand, Order>()
-                 .ForMember(member => member.OrderDetails,
-                 options =>
-                 options.MapFrom(p => p.OrderDetails.Select(s => new OrderDetail
-                 {
-                     Price = s.Price,
-                     Quantity = s.Quantity,
-                     ProductId = s.ProductId
-                 }).ToList()));
+                .ForMember(member =>
+                member.OrderDetails,
+                options =>
+                options.Ignore());
         }
     }
 }

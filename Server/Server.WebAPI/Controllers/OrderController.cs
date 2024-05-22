@@ -8,9 +8,9 @@ using Server.WebAPI.Abstractions;
 
 namespace Server.WebAPI.Controllers
 {
-    public sealed class COrderrController : ApiController
+    public sealed class OrderController : ApiController
     {
-        public COrderrController(IMediator mediator) : base(mediator)
+        public OrderController(IMediator mediator) : base(mediator)
         {
         }
 

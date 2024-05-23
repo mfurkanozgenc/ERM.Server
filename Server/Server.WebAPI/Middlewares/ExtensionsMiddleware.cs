@@ -17,8 +17,8 @@ namespace Server.WebAPI.Middlewares
                     {
                         UserName = "admin",
                         Email = "admin@admin.com",
-                        FirstName = "Taner",
-                        LastName = "Saydam",
+                        FirstName = "Mustafa Furkan",
+                        LastName = "Özgenç",
                         EmailConfirmed = true
                     };
 

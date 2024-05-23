@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Server.Application.Features.Orders.CreateOrder;
 using Server.Application.Features.Orders.DeleteOrder;
 using Server.Application.Features.Orders.GetAllOrderQuery;
+using Server.Application.Features.Orders.RequirementsPlanningByOrderId;
 using Server.Application.Features.Orders.UpdateOrder;
 using Server.WebAPI.Abstractions;
 
@@ -15,10 +16,10 @@ namespace Server.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetAll(GetAllOrderQuery request,CancellationToken cancellationToken)
+        public async Task<IActionResult> GetAll(GetAllOrderQuery request, CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(request, cancellationToken);
-            return StatusCode(response.StatusCode,response);
+            return StatusCode(response.StatusCode, response);
         }
 
         [HttpPost]
@@ -38,6 +39,13 @@ namespace Server.WebAPI.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Update(UpdateOrderCommand request, CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(request, cancellationToken);
+            return StatusCode(response.StatusCode, response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RequirementsPlanningByOrderId(RequirementsPlanningByOrderIdCommand request, CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(request, cancellationToken);
             return StatusCode(response.StatusCode, response);

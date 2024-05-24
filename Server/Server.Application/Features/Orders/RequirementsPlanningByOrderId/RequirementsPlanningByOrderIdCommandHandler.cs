@@ -54,7 +54,7 @@ namespace Server.Application.Features.Orders.RequirementsPlanningByOrderId
                     }
                 }
 
-                foreach (var item in listOfProductsToBeProduced)
+                foreach (var item in listOfProductsToBeProduced) 
                 {
                     Recipe? recipe = await recipeRepository
                         .Where(p => p.ProductId == item.ProductId)
@@ -102,7 +102,7 @@ namespace Server.Application.Features.Orders.RequirementsPlanningByOrderId
 
             return new RequirementsPlanningByOrderIdCommandResponse(
                DateOnly.FromDateTime(DateTime.Now),
-               order.OrderNumber + "Nolu Siparişin İhtiyaç PWlanlaması",
+               order.OrderNumber + "Nolu Siparişin İhtiyaç Planlaması",
                requirementsPlanningProducts);
         }
     }

@@ -3,6 +3,8 @@ using Server.Application.Features.Customers.CreateCustomer;
 using Server.Application.Features.Customers.UpdateCustomer;
 using Server.Application.Features.Depots.CreateDepot;
 using Server.Application.Features.Depots.UpdateDepot;
+using Server.Application.Features.Invoices.CreateInvoice;
+using Server.Application.Features.Invoices.UpdateInvoice;
 using Server.Application.Features.Orders.CreateOrder;
 using Server.Application.Features.Orders.UpdateOrder;
 using Server.Application.Features.Products.CreateProduct;
@@ -48,12 +50,30 @@ namespace Server.Application.Mapping
                       ProductId = s.ProductId
                   }).ToList()));
 
-
             CreateMap<UpdateOrderCommand, Order>()
                 .ForMember(member =>
                 member.OrderDetails,
                 options =>
                 options.Ignore());
+
+            CreateMap<CreateInvoiceCommand, Invoice>()
+             .ForMember(member => member.Type, options =>
+             options.MapFrom(p => InvoiceTypeEnum.FromValue(p.TypeValue)))
+            .ForMember(member => member.InvoiceDetails,
+            options =>
+            options.MapFrom(p => p.InvoiceDetails.Select(s => new InvoiceDetail
+            {
+                Price = s.Price,
+                Quantity = s.Quantity,
+                ProductId = s.ProductId,
+                DepotId = s.DepotId
+            }).ToList()));
+
+            CreateMap<UpdateInvoiceCommand, Invoice>()
+            .ForMember(member =>
+            member.InvoiceDetails,
+            options =>
+            options.Ignore());
         }
     }
 }

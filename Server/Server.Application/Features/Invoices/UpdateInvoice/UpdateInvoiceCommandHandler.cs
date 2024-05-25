@@ -3,6 +3,7 @@ using GenericRepository;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Server.Domain.Entities;
+using Server.Domain.Enums;
 using Server.Domain.Repositories;
 using TS.Result;
 

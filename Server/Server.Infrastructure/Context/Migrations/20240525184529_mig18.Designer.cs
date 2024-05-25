@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using Server.Infrastructure.Context;
 namespace Server.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240525184529_mig18")]
+    partial class mig18
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -337,10 +340,6 @@ namespace Server.Infrastructure.Migrations
 
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ProductionNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("decimal(7,2)");

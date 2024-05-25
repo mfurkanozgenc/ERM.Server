@@ -9,5 +9,6 @@ namespace Server.Application.Features.Invoices.CreateInvoice
        DateOnly Date,
        string InvoiceNumber,
        List<InvoiceDetailDto> InvoiceDetails,
+       Guid? OrderId,
        int TypeValue) : IRequest<Result<string>>;
 }

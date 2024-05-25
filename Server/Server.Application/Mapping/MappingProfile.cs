@@ -7,6 +7,7 @@ using Server.Application.Features.Invoices.CreateInvoice;
 using Server.Application.Features.Invoices.UpdateInvoice;
 using Server.Application.Features.Orders.CreateOrder;
 using Server.Application.Features.Orders.UpdateOrder;
+using Server.Application.Features.Productions.CreateProduction;
 using Server.Application.Features.Products.CreateProduct;
 using Server.Application.Features.Products.UpdateProduct;
 using Server.Application.Features.RecipeDetails.CreateRecipeDetails;
@@ -74,6 +75,8 @@ namespace Server.Application.Mapping
             member.InvoiceDetails,
             options =>
             options.Ignore());
+
+            CreateMap<CreateProductionCommand, Production>();
         }
     }
 }

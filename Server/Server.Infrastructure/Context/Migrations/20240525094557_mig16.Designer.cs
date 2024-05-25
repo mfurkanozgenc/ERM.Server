@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.Infrastructure.Context;
 
@@ -11,9 +12,11 @@ using Server.Infrastructure.Context;
 namespace Server.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240525094557_mig16")]
+    partial class mig16
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -332,13 +335,10 @@ namespace Server.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("DepotId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ProductionNumber")
+                    b.Property<string>("ProductionNummber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -346,8 +346,6 @@ namespace Server.Infrastructure.Migrations
                         .HasColumnType("decimal(7,2)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DepotId");
 
                     b.HasIndex("ProductId");
 
@@ -498,19 +496,11 @@ namespace Server.Infrastructure.Migrations
 
             modelBuilder.Entity("Server.Domain.Entities.Production", b =>
                 {
-                    b.HasOne("Server.Domain.Entities.Depot", "Depot")
-                        .WithMany()
-                        .HasForeignKey("DepotId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Server.Domain.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Depot");
 
                     b.Navigation("Product");
                 });

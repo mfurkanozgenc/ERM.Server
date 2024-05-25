@@ -2,6 +2,7 @@
 using GenericRepository;
 using MediatR;
 using Server.Domain.Entities;
+using Server.Domain.Enums;
 using Server.Domain.Repositories;
 using TS.Result;
 
@@ -11,6 +12,7 @@ namespace Server.Application.Features.Invoices.CreateInvoice
         IInvoiceRepository invoiceRepository,
         IStockMovementRepository stockMovementRepository,
         IUnitOfWork unitOfWork,
+        IOrderRepository orderRepository,
         IMapper mapper) : IRequestHandler<CreateInvoiceCommand, Result<string>>
     {
         public async Task<Result<string>> Handle(CreateInvoiceCommand request, CancellationToken cancellationToken)
@@ -38,6 +40,16 @@ namespace Server.Application.Features.Invoices.CreateInvoice
                 await stockMovementRepository.AddRangeAsync(stockMovements);
             }
             await invoiceRepository.AddAsync(invoice, cancellationToken);
+
+            if(request.OrderId is not null)
+            {
+                Order? order = await orderRepository.GetByExpressionWithTrackingAsync(o => o.Id == request.OrderId);
+
+                if(order is not null)
+                {
+                    order.Status = OrderStatusEnum.Completed;
+                }
+            }
             await unitOfWork.SaveChangesAsync(cancellationToken);
 
             return "Fatura Oluşturma Başarılı";

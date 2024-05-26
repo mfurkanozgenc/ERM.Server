@@ -8,7 +8,7 @@ namespace Server.WebAPI.Abstractions
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
-    //[Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public abstract class ApiController : ControllerBase
     {
         public readonly IMediator _mediator;

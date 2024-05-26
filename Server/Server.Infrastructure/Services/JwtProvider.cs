@@ -22,6 +22,8 @@ namespace Server.Infrastructure.Services
                 new Claim("Id", user.Id.ToString()),
                 new Claim("Name", user.FullName),
                 new Claim("Email", user.Email ?? ""),
+                new Claim("FirstName", user.FirstName ?? ""),
+                new Claim("LastName", user.LastName ?? ""),
                 new Claim("UserName", user.UserName ?? ""),
                 new Claim("Role", user.UserRole.Value.ToString() ?? "")
             };

@@ -27,14 +27,14 @@ namespace Server.Application.Features.Auth.Login
 
             SignInResult signInResult = await signInManager.CheckPasswordSignInAsync(user, request.Password, true);
 
-            if (signInResult.IsLockedOut)
-            {
-                TimeSpan? timeSpan = user.LockoutEnd - DateTime.UtcNow;
-                if (timeSpan is not null)
-                    return (500, $"Şifrenizi 3 defa yanlış girdiğiniz için kullanıcı {Math.Ceiling(timeSpan.Value.TotalMinutes)} dakika süreyle bloke edilmiştir");
-                else
-                    return (500, "Kullanıcınız 3 kez yanlış şifre girdiği için 5 dakika süreyle bloke edilmiştir");
-            }
+            //if (signInResult.IsLockedOut)
+            //{
+            //    TimeSpan? timeSpan = user.LockoutEnd - DateTime.UtcNow;
+            //    if (timeSpan is not null)
+            //        return (500, $"Şifrenizi 3 defa yanlış girdiğiniz için kullanıcı {Math.Ceiling(timeSpan.Value.TotalMinutes)} dakika süreyle bloke edilmiştir");
+            //    else
+            //        return (500, "Kullanıcınız 3 kez yanlış şifre girdiği için 5 dakika süreyle bloke edilmiştir");
+            //}
 
             if (signInResult.IsNotAllowed)
             {

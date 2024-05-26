@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Server.Application.Behaviors;
+using Server.Domain.Entities;
 
 namespace Server.Application
 {

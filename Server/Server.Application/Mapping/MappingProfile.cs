@@ -12,6 +12,7 @@ using Server.Application.Features.Products.CreateProduct;
 using Server.Application.Features.Products.UpdateProduct;
 using Server.Application.Features.RecipeDetails.CreateRecipeDetails;
 using Server.Application.Features.RecipeDetails.UpdateRecipeDetail;
+using Server.Application.Features.Users.GetAllUser;
 using Server.Domain.Dtos;
 using Server.Domain.Entities;
 using Server.Domain.Enums;
@@ -77,6 +78,9 @@ namespace Server.Application.Mapping
             options.Ignore());
 
             CreateMap<CreateProductionCommand, Production>();
+
+            CreateMap<AppUser, GetAllUserQueryResponse>();
+
         }
     }
 }
